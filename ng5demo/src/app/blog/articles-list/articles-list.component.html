@@ -1,0 +1,51 @@
+<div class="article-list">
+   
+ <mat-card>
+
+ 
+        
+  <a mat-button class="ml-auto mat-raised-button mat-button-wrapper mat-primary" routerLink="/articles/add">Add Article</a>
+       
+        <!--  <mat-card-subtitle>Dog Breed</mat-card-subtitle>-->
+    
+
+  <div class="example-container mat-elevation-z8 v-margin">
+    <mat-table #table [dataSource]="articlesList">
+  
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+  
+      <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
+      </ng-container>
+  
+      <!-- Weight Column -->
+      <ng-container matColumnDef="content">
+        <mat-header-cell *matHeaderCellDef> Content </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.content}} </mat-cell>
+      </ng-container> 
+      
+       <!-- Weight Column -->
+       <!-- Weight Column -->
+       <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+          <button mat-icon-button routerLink=""><i class="material-icons md-18">mode_edit</i> </button>  
+          <button mat-icon-button><i class="material-icons md-18">delete</i></button>        
+          </mat-cell>
+        </ng-container> 
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+</mat-card>
+</div>

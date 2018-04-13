@@ -22,6 +22,15 @@ const baseHref = "";
 const deployUrl = "";
 const projectRoot = process.cwd();
 const maximumInlineSize = 10;
+
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+const extractSass = new ExtractTextPlugin({
+  filename: 'dist/[name].bundle.css',
+  allChunks: true,
+
+});
+
 const postcssPlugins = function (loader) {
         return [
             postcssImports({
@@ -122,7 +131,8 @@ module.exports = {
   "resolve": {
     "extensions": [
       ".ts",
-      ".js"
+      ".js",
+      ".scss"
     ],
     "symlinks": true,
     "modules": [
@@ -150,19 +160,19 @@ module.exports = {
       "./src\\polyfills.ts"
     ],
     "styles": [
-      "./src\\styles.css"
+      "./sass\\material.scss"
     ]
   },
   "output": {
     "path": path.join(process.cwd(), "dist"),
-    "filename": "[name].bundle.js",
+    "filename": "[name].bundle.css",
     "chunkFilename": "[id].chunk.js",
     "crossOriginLoading": false
   },
   "module": {
     "rules": [
       {
-        "test": /\.html$/,
+        "test": /\.html$/,   
         "loader": "raw-loader"
       },
       {
@@ -202,31 +212,19 @@ module.exports = {
       },
       {
         "exclude": [
-          path.join(process.cwd(), "src\\styles.css")
+          path.join(process.cwd(), "sass\\material.css")
         ],
         "test": /\.scss$|\.sass$/,
-        "use": [
-          {
-            "loader": "raw-loader"
-          },
-          {
-            "loader": "postcss-loader",
-            "options": {
-              "ident": "embedded",
-              "plugins": postcssPlugins,
-              "sourceMap": true
-            }
-          },
-          {
-            "loader": "sass-loader",
-            "options": {
-              "sourceMap": true,
-              "precision": 8,
-              "includePaths": []
-            }
-          }
-        ]
-      },
+        use: extractSass.extract({
+          use: [{
+              loader: "css-loader"
+          }, {
+              loader: "sass-loader"
+          }],
+          // use style-loader in development
+          fallback: "style-loader"
+      })
+      },           
       {
         "exclude": [
           path.join(process.cwd(), "src\\styles.css")
@@ -298,34 +296,7 @@ module.exports = {
           }
         ]
       },
-      {
-        "include": [
-          path.join(process.cwd(), "src\\styles.css")
-        ],
-        "test": /\.scss$|\.sass$/,
-        "use": [
-          "style-loader",
-          {
-            "loader": "raw-loader"
-          },
-          {
-            "loader": "postcss-loader",
-            "options": {
-              "ident": "embedded",
-              "plugins": postcssPlugins,
-              "sourceMap": true
-            }
-          },
-          {
-            "loader": "sass-loader",
-            "options": {
-              "sourceMap": true,
-              "precision": 8,
-              "includePaths": []
-            }
-          }
-        ]
-      },
+      
       {
         "include": [
           path.join(process.cwd(), "src\\styles.css")
@@ -492,7 +463,8 @@ module.exports = {
       "tsConfigPath": "src\\tsconfig.app.json",
       "skipCodeGeneration": true,
       "compilerOptions": {}
-    })
+    }),
+    extractSass
   ],
   "node": {
     "fs": "empty",

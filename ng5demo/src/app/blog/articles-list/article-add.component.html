@@ -1,0 +1,8 @@
+<div class="article-add">
+ <mat-card>  
+    <editor [(ngModel)]="articleModel"></editor>
+
+    <div> <a routerLink="../" mat-button> Cancel </a>     
+     <button  mat-button (click)="saveArticle()" > Save </button> </div>
+</mat-card>
+</div>

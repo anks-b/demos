@@ -1,13 +1,9 @@
-<mat-toolbar>            
-  <a  > 
-     <button mat-button>Home</button>
-   </a>
-
-   <a> 
-     <button mat-button>Blog</button>
-  </a>
-
-  <a> 
-      <button mat-button>other</button>
+<nav class="nav-bar">
+  <mat-toolbar fxLayout="row" fxLayoutAlign="space-around center">            
+  <a routerLink="/dashboard" routerLinkActive="active mat-raised-button mat-button-wrapper" mat-button> Home </a>
+  <a routerLink="/blog" routerLinkActive="active mat-raised-button mat-button-wrapper" mat-button>Blog</a>    
+  <a class="ml-auto" mat-button>
+      Settings
   </a>
 </mat-toolbar>
+</nav>
