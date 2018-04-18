@@ -17,6 +17,14 @@ import { EditorModule  } from '@tinymce/tinymce-angular';
 import { ArticlesModule } from './blog/articles-list/articles.module'
 import { QaModule } from './blog/qa/qa.module';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireStorageModule } from 'angularfire2/storage';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
+
+import { environment } from '../environments/environment'
+
 
 @NgModule({
   declarations: [
@@ -35,6 +43,15 @@ import { QaModule } from './blog/qa/qa.module';
 
     FlexLayoutModule,
     EditorModule,
+
+    
+    AngularFireModule.initializeApp(environment.firebase), // imports firebase/app needed for everything
+    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
+    AngularFireStorageModule, // imports firebase/storage only needed for storage features
+
+
+
     ArticlesModule,
     QaModule,               
     AppRouteModule

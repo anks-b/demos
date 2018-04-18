@@ -1,8 +1,19 @@
 <div class="article-add">
  <mat-card>  
-    <editor [(ngModel)]="articleModel"></editor>
+       
+                <mat-form-field class="">
+                    <input matInput [(ngModel)]="articleModel.title" placeholder="Title of Article" value="">
+                </mat-form-field>
 
-    <div> <a routerLink="../" mat-button> Cancel </a>     
-     <button  mat-button (click)="saveArticle()" > Save </button> </div>
+              
+                    <editor [(ngModel)]="articleModel.content" class="v-margin" ></editor>
+                
+              
+                
+                    <div> 
+                        <a routerLink="../" mat-button> Cancel </a>     
+                        <button  mat-button (click)="saveArticle()" > Save </button> 
+                    </div>                                                  
+                              
 </mat-card>
 </div>

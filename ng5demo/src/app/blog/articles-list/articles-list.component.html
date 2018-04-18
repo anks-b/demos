@@ -14,14 +14,22 @@
   
       <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
+
+
+              
+      <!-- S.No Column -->
+      <ng-container matColumnDef="sno">
+          <mat-header-cell *matHeaderCellDef> S.No </mat-header-cell>
+          <mat-cell *matCellDef="let element; let i = index; "> {{i + 1  }} </mat-cell>
+      </ng-container>            
   
-      <!-- Position Column -->
+      <!-- id Column -->
       <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
       </ng-container>
   
-      <!-- Name Column -->
+      <!-- Title Column -->
       <ng-container matColumnDef="title">
         <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
@@ -30,7 +38,7 @@
       <!-- Weight Column -->
       <ng-container matColumnDef="content">
         <mat-header-cell *matHeaderCellDef> Content </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.content}} </mat-cell>
+        <mat-cell *matCellDef="let element"> {{ '' }} </mat-cell>
       </ng-container> 
       
        <!-- Weight Column -->

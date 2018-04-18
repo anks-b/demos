@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Article } from '../../../Models/Blog/Article'
+import { ArticlesService } from './service/articles.service';
+import { MatSnackBar } from '@angular/material'
 
 @Component({
   
@@ -17,14 +19,26 @@ export class ArticlesListComponent implements OnInit {
    new Article ( 6,'title6' )
 
   ];
-  displayedColumns = ['id', 'title', 'content', 'action'];
+  displayedColumns = ['sno','id', 'title', 'content', 'action'];
 
-  constructor() {
+  constructor( public articlesService:ArticlesService, public snackBar:MatSnackBar ) {
 
 
    }
 
   ngOnInit() {
+
+    this.articlesService.getArticles().subscribe( nxt => { 
+    
+      if(nxt.length >0){
+        this.articlesList = nxt;
+      }     
+
+     }, err => { 
+
+        this.snackBar.open('Error in loading articles',null, { duration:2500 })
+
+       })
   }
 
 }
